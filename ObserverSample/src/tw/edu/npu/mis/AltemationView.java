@@ -34,6 +34,13 @@ public class AltemationView implements Observer,Showable {
     private final Window mWindow;
     private final Model mModel;
     String s = "";
+    /**
+     * view的抽象類別 有下列參數的建構式
+     * @param name 
+     * @param window 
+     * @param model 
+     * @param s 空值
+     */
 
     public AltemationView(String name, Window window, Model model) {
         mName = name;
@@ -55,7 +62,10 @@ public class AltemationView implements Observer,Showable {
     public void onDraw() {
             if(!s.equals(mModel.getData()))   System.out.println("View2 (" + mName + "): " +new StringBuilder(mModel.getData()).reverse());
       s = mModel.getData();
-       
+      
+      /**
+     * onDraw 使用者輸出倒著印出來
+     */
        
     }
 

@@ -35,9 +35,17 @@ import java.util.List;
 public class Subject {
   public List<Observer> Observer = new ArrayList<Observer>();
   public void attach(Observer o) {
+      /**
+     * @param o 
+     * 新增需要註冊的View
+     */
         Observer.add(o);
     }
     public void detach(Observer o) {
+        /**
+     * @param o 
+     * 移除沒有需要註冊的View
+     */
         Observer.remove(o);
     }
     
