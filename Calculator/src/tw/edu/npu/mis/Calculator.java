@@ -8,8 +8,10 @@ package tw.edu.npu.mis;
 /**
  * The model class of the calculator application.
  */
-public class Calculator {
-    
+public class Calculator extends java.util.Observable {
+   String count ="",c; 
+   int x,y;
+   
     /**
      * The available operators of the calculator.
      */
@@ -34,27 +36,92 @@ public class Calculator {
     }
     
     public void appendDigit(int digit) {
-        // TODO code application logic here
+        count += String.valueOf(digit);
+        getDisplay();
     }
     
-    public void appendDot() {
-        // TODO code application logic here
+    public void appendDot(String s) {
+        count += String.valueOf(s);
+        getDisplay();
     }
     
     public void performOperation(Operator operator) {
-        // TODO code application logic here
+        if(operator == Operator.PLUS)
+        {
+           x  = Integer.parseInt(count);
+           count = "";
+           c ="+";
+           getDisplay();
+        }
+        if(operator == Operator.MINUS)
+        {
+           x  = Integer.parseInt(count);
+           count = "";
+           c ="-";
+           getDisplay();
+        }
+        if(operator == Operator.TIMES)
+        {
+           x  = Integer.parseInt(count);
+           count = "";
+           c ="*";
+           getDisplay();
+        }
+        if(operator == Operator.OVER)
+        {
+           x  = Integer.parseInt(count);
+           count = "";
+           c ="/";
+           getDisplay();
+        }
+        if(operator == Operator.EQUAL)
+        {
+            if(c =="+")
+            {
+            y = Integer.parseInt(count);
+            count = String.valueOf(x+y);
+            getDisplay();
+            count = "";
+            }
+            if(c =="-")
+            {
+            y = Integer.parseInt(count);
+            count = String.valueOf(x-y);
+            getDisplay();
+            count = "";
+            }
+            if(c =="*")
+            {
+            y = Integer.parseInt(count);
+            count = String.valueOf(x*y);
+            getDisplay();
+            count = "";
+            }
+            if(c =="/")
+            {
+            y = Integer.parseInt(count);
+            count = String.valueOf(x/y);
+            getDisplay();
+            count = "";
+            }
+        }
+        
     }
     
     public String getDisplay() {
         // TODO code application logic here
+        setChanged();
+        notifyObservers(count);
         return null;
     }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public void operator(String operator)
+    {
+        if(operator == "+") performOperation(Operator.PLUS);
+        if(operator == "-") performOperation(Operator.MINUS);
+        if(operator == "=") performOperation(Operator.EQUAL);
+        if(operator == "*") performOperation(Operator.TIMES);
+        if(operator == "/") performOperation(Operator.OVER);
     }
+   
 
 }
